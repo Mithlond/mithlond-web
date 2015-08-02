@@ -36,7 +36,7 @@
          * @param structureID The optional id of the structure path used for including header and footer markup files.
          * Must not contain whitespace, and defaults to 'standard'
          */
-        $rootScope.createTheme = new function (name, structureID) {
+        $rootScope.createTheme = function (name, structureID) {
 
             /**
              * The active theme's name.
@@ -70,7 +70,7 @@
          *
          * @param themeName The name of the theme to select.
          */
-        $rootScope.setTheme = new function (themeName) {
+        $rootScope.setTheme = function (themeName) {
 
             // Check sanity
             if (typeof themeName === 'string' || themeName instanceof String) {
