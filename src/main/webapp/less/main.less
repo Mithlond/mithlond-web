@@ -1,0 +1,129 @@
+// Define some less constants here
+@bgColor_standard: #f5f5f5;
+@borderColor_standard: #e7e7e7;
+@padding: 15px;
+@margin: 60px;
+
+// Define locally stashed type faces.
+@font-face {
+  font-family: 'Fondamento';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fondamento Regular'), local('Fondamento-Regular'), url('../fonts/Fondamento/Fondamento-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Fondamento';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Fondamento-Italic'), url('../fonts/Fondamento/Fondamento-Italic.ttf') format('truetype');
+}
+
+.boldItalic() {
+  font-style: italic;
+  font-weight: bold;
+}
+
+body {
+  margin-bottom: @margin;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: @margin;
+  background-color: @bgColor_standard;
+  border: 1px solid @borderColor_standard;
+}
+
+.footer > .container {
+  padding-top: @padding;
+  padding-right: @padding;
+  padding-left: @padding;
+}
+
+.navbar-default {
+
+  .active > a, .active > a:hover {
+    .boldItalic();
+  }
+}
+
+// Theme CSS override definitions
+.pink {
+
+  // Define constants for this theme.
+  @bgColor_pink: #fef5f5;
+  @borderColor_pink: #f7c7c7;
+  @smallColor_pink: #aa7777;
+
+  small {
+    color: @smallColor_pink;
+  }
+
+  .navbar-default {
+    background-color: @bgColor_pink;
+    border-color: @borderColor_pink;
+
+    .active > a {
+      color: @smallColor_pink;
+      background-color: @bgColor_pink;
+      .boldItalic();
+    }
+
+    .active > a:hover {
+      color: @borderColor_pink;
+      background-color: @smallColor_pink;
+      .boldItalic();
+    }
+  }
+
+  .footer {
+    background-color: @bgColor_pink;
+    border: 1px solid @borderColor_pink;
+  }
+
+  .well {
+    background-color: @bgColor_pink;
+    border-color: @borderColor_pink;
+  }
+}
+
+.mint {
+
+  // Define constants for this theme.
+  @bgColor_mint: #f5fef5;
+  @borderColor_mint: #c7f7c7;
+  @smallColor_mint: #77aa77;
+
+  small {
+    color: @smallColor_mint;
+  }
+
+  .navbar-default {
+    background-color: @bgColor_mint;
+    border-color: @borderColor_mint;
+
+    .active > a {
+      color: @smallColor_mint;
+      background-color: @bgColor_mint;
+      .boldItalic();
+    }
+
+    .active > a:hover {
+      color: @borderColor_mint;
+      background-color: @smallColor_mint;
+      .boldItalic();
+    }
+  }
+
+  .footer {
+    background-color: @bgColor_mint;
+    border: 1px solid @borderColor_mint;
+  }
+
+  .well {
+    background-color: @bgColor_mint;
+    border-color: @borderColor_mint;
+  }
+}

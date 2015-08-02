@@ -1,0 +1,39 @@
+<div class="page-header">
+    <h1>People View
+        <small>(Quickstart AngularJS Application)</small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-sm-offset-2"></div>
+    <div class="col-sm-8">
+        <p>This is the landing page showing the peopleView.html for the AngularJS application. Note
+            that footer and header documents are included dynamically by AngularJS and that Maven's resource plugin has
+            replaced all tokens to fixed values. You should see fixed versions and build times in the footer below.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-offset-2"></div>
+    <div class="col-sm-8">
+        <h2>Composers <small>(Dynamic data)</small></h2>
+        <table class="table-responsive table-condensed table-striped table-hover">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birthday</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="current in people">
+                <td>{{current.firstName}}</td>
+                <td>{{current.lastName}}</td>
+                <td>{{current.birthday | date:'yyyy-MM-dd' }}</td>
+                <td><a href="#/peopleDetails/{{current.jpaId}}" class="btn btn-default btn-xs">Details</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

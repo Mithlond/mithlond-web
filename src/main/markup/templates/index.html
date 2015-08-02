@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="MithlondWebApp">
+<head>
+    <!-- Ensure proper encoding. -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta about="POM version: ${version}, Build time: ${timestamp}">
+
+    <!-- Define the page title -->
+    <title>Mithlonds Intranät</title>
+
+    <!-- Include Links for Font-Awesome, WebFonts and custom CSS -->
+    <link rel="stylesheet"
+          href="${cdnPrefix}/bootstrap/${org.webjars/bootstrap/version}/css/bootstrap.${minSuffix}css">
+    <link rel="stylesheet"
+          href="${cdnPrefix}/font-awesome/${org.webjars/font-awesome/version}/css/font-awesome.${minSuffix}css">
+    <link rel="stylesheet" href="css/main.${minSuffix}css">
+
+    <!-- Include JavaScript -->
+    <script type="text/javascript" src="${cdnPrefix}/jquery/${org.webjars/jquery/version}/jquery.${minSuffix}js"></script>
+    <script type="text/javascript"
+            src="${cdnPrefix}/bootstrap/${org.webjars/bootstrap/version}/js/bootstrap.${minSuffix}js"></script>
+    <script type="text/javascript"
+            src="${cdnPrefix}/angularjs/${org.webjars/angularjs/version}/angular.${minSuffix}js"></script>
+    <script type="text/javascript"
+            src="${cdnPrefix}/angularjs/${org.webjars/angularjs/version}/angular-route.${minSuffix}js"></script>
+    <script type="text/javascript"
+            src="${cdnPrefix}/angularjs/${org.webjars/angularjs/version}/angular-aria.${minSuffix}js"></script>
+    <script type="text/javascript"
+            src="${cdnPrefix}/angularjs/${org.webjars/angularjs/version}/angular-sanitize.${minSuffix}js"></script>
+    <script type="text/javascript"
+            src="${cdnPrefix}/angular-strap/${org.webjars/angular-strap/version}/angular-strap.${minSuffix}js"></script>
+    <script type="text/javascript"
+            src="${cdnPrefix}/angular-strap/${org.webjars/angular-strap/version}/angular-strap.tpl.${minSuffix}js"></script>
+
+    <!-- Include the AngularJS application and all its Modules. -->
+    <script type="text/javascript" src="app/MithlondWeb.js"></script>
+    <script type="text/javascript" src="app/modules/mithlond/module.js"></script>
+</head>
+<body data-ng-class="theme.name">
+<!-- Navbar -->
+<nav class="navbar navbar-default" role="navigation" data-bs-navbar>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Mithlond</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">Nyheter <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#/news">Nyheter</a></li>
+                <li><a href="#/news/status">Status</a></li>
+                <li><a href="#/news/ideas">Ideer</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">Medlemmar <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#/members">Sök medlemmar</a></li>
+                <li><a href="#/members/reports">Rapporter och Rullan</a></li>
+                <li><a href="#/members/admin">Administrera medlemmar</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">Föreningen <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#/organisation">Föreningsfakta</a></li>
+                <li><a href="#/organisation/activities">Aktiviteter</a></li>
+                <li><a href="#/organisation/law">Lagen</a></li>
+                <li><a href="#/organisation/posts">Ämbetsordningen</a></li>
+                <li><a href="#/organisation/decrees">Påbud</a></li>
+                <li><a href="#/organisation/mailinglists">ePost-listor</a></li>
+                <li><a href="#/organisation/private/council">Rådssidor</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">Inställningar <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#/settings/personalInfo"><i class="fa fa-cogs fa-fw"></i> Personligt</a></li>
+                <li><a href="#/settings/guildsGroups"><i class="fa fa-users fa-fw"></i> Gillen, Grupper</a></li>
+                <li><a href="#/settings/allergies"><i class="fa fa-medkit fa-fw"></i> Allergier</a></li>
+                <li><a href="#/settings/changeCredentials"><i class="fa fa-key fa-fw"></i> Ändra lösenord</a></li>
+                <li><a href="#/settings/themes"><i class="fa fa-picture fa-fw"></i> Välj tema</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <div data-ng-view></div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div data-ng-include="theme.footer()"></div>
+    </div>
+</footer>
+</body>
+</html>

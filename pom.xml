@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- +=============================================== -->
+    <!-- | Section 1:  Project information                -->
+    <!-- +=============================================== -->
+    <parent>
+        <groupId>se.mithlond.codestyle.poms</groupId>
+        <artifactId>mithlond-codestyle-war-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>se.mithlond.web</groupId>
+    <artifactId>mithlond-intranet-war</artifactId>
+    <name>${project.artifactId}</name>
+    <description>Mithlond: Presentation WAR (version ${project.version})</description>
+    <packaging>war</packaging>
+    <url>${url.prefix}/${path.in.reactor}</url>
+
+    <properties>
+        <!-- Maven site deployment properties (not complete in this quickstart) -->
+        <path.in.reactor/>
+
+        <!--
+            Use the maven-resource-plugin to generate a set of *static* markup files.
+            This implies no server-side processing is necessary in runtime and that testability is improved.
+        -->
+        <webapp.markup.dir>${project.basedir}/src/main/markup</webapp.markup.dir>
+        <resource.work.parent.dir>${basedir}/target/generated-sources/resources</resource.work.parent.dir>
+        <resource.work.intermediate.dir>${resource.work.parent.dir}/intermediate</resource.work.intermediate.dir>
+        <resource.work.complete.dir>${resource.work.parent.dir}/complete</resource.work.complete.dir>
+
+        <!--
+            Ensure that the exploded webapp directory can be used by Wildfly's hot deployment
+            by making the exploded directory name end with ".war".
+        -->
+        <webapp.exploded.dir>${project.build.directory}/exploded/webapp.war</webapp.exploded.dir>
+        <webapp.exploded.css.dir>${webapp.exploded.dir}/css</webapp.exploded.css.dir>
+
+        <!-- Dependency versions -->
+        <webjars.angularjs.version>1.4.1</webjars.angularjs.version>
+        <webjars.angularuiselect.version>0.11.2</webjars.angularuiselect.version>
+        <webjars.bootstrap.version>3.3.5</webjars.bootstrap.version>
+        <webjars.jquery.version>1.11.1</webjars.jquery.version>
+        <webjars.chosen.version>1.2.0</webjars.chosen.version>
+        <webjars.angularstrap.version>2.2.3</webjars.angularstrap.version>
+        <webjars.fontawesome.version>4.3.0-4</webjars.fontawesome.version>
+
+        <!-- Build-controlling properties -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.sssZ</maven.build.timestamp.format>
+        <breakOnFailure.license>false</breakOnFailure.license>
+    </properties>
+
+    <!-- +=============================================== -->
+    <!-- | Section 2:  Dependency (management) settings   -->
+    <!-- +=============================================== -->
+    <dependencies>
+        <!--
+            WebJars dependencies contains all the JavaScript, CSS and less resources used
+            within this presentation. They all use the Maven dependency management system.
+        -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angularjs</artifactId>
+            <version>${webjars.angularjs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui</artifactId>
+            <version>${webjars.jquery.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${webjars.bootstrap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-ui-select</artifactId>
+            <version>${webjars.angularuiselect.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>chosen</artifactId>
+            <version>${webjars.chosen.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-strap</artifactId>
+            <version>${webjars.angularstrap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>${webjars.fontawesome.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- +=============================================== -->
+    <!-- | Section 3:  Build settings                     -->
+    <!-- +=============================================== -->
+    <build>
+        <plugins>
+
+            <!--
+                Configures the resource plugin to copy and filter resources.
+                This substitutes ${variables} to their properties.
+
+                Why:  Copies and filters resources
+                Used: Standard lifecycle, mvn process-resources.
+            -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <id>1-substitute-maven-properties</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${resource.work.intermediate.dir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <includes>
+                                        <include>**/*.html</include>
+                                        <include>**/*.properties</include>
+                                    </includes>
+                                    <directory>${webapp.markup.dir}</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <filters>
+                                <filter>${project.build.outputDirectory}/META-INF/maven/dependencies.properties</filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>2-substitute-environment-properties</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${resource.work.complete.dir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${resource.work.intermediate.dir}/templates</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <filters>
+                                <filter>${resource.work.intermediate.dir}/tokens/${environment.name}.properties</filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+                Configures the bundle plugin to generate OSGi-compliant manifest entries.
+                This enables this WAR to double as a WBA (Web Bundle Archive), which means that it can be
+                deployed into OSGi containers such as Apache Karaf.
+
+                Why:  Assigns some manifest data within the WARs in WAR projects. Reads bundle-generated manifest.
+                Used: Standard lifecycle, mvn process-classes.
+            -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>{local-packages}</Export-Package>
+                        <Build-Time>${maven.build.timestamp}</Build-Time>
+                        <!-- Enterprise OSGi properties -->
+                        <Web-ContextPath>/quickstart/angular</Web-ContextPath>
+                        <!-- JBoss dependencies; should be superceeded by the jboss-deployment-structure.xml -->
+                        <!-- Dependencies>javax.ejb.api</Dependencies -->
+                        <!-- OSGi Classpath stuff, to see bundled dependencies. -->
+                        <Bundle-ClassPath>.,WEB-INF/classes,{maven-dependencies}</Bundle-ClassPath>
+                        <Embed-Directory>WEB-INF/lib</Embed-Directory>
+                        <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <!-- Remove some unwanted imports -->
+                        <Import-Package>!org.junit.*,!junit.framework,!groovy.lang,!com.ibm.*,
+                            !org.apache.tools.*,!sun.reflect,!org.codehaus.groovy.*,
+                            !org.apache.log4j.*,!org.apache.commons.logging.*,
+                            !org.codehaus.commons.compiler.*,*
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*.css</exclude>
+                        <exclude>**/datatables/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!--
+                Configures the lesscss plugin to compile all less files into CSS files to be used
+                within the application.
+
+                Why:  Generates CSS files from LESS files.
+                Used: Standard lifecycle, mvn process-sources.
+            -->
+            <plugin>
+                <groupId>org.lesscss</groupId>
+                <artifactId>lesscss-maven-plugin</artifactId>
+                <version>1.7.0.1.1</version>
+                <configuration>
+                    <sourceDirectory>${project.basedir}/src/main/webapp/less</sourceDirectory>
+                    <outputDirectory>${webapp.exploded.dir}/css</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile_debug_css_files</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <outputFileFormat>{fileName}.css</outputFileFormat>
+                            <compress>false</compress>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>compile_minified_css_files</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <outputFileFormat>{fileName}.min.css</outputFileFormat>
+                            <compress>true</compress>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+                Replace references to CSS and JS in HTML files with minified versions.
+                This permits us to generate HTML files from
+
+                Why:  Generates HTML files with different script src mappings.
+                Used: Standard lifecycle, mvn process-resources.
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <configuration>
+                    <basedir>${basedir}</basedir>
+                    <filesToInclude>${resource.work.parent.dir}/intermediate/</filesToInclude>
+                    <outputDir>${webapp.exploded.dir}</outputDir>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>prod</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <tokenFile>${webapp.markup.tokens.dir}/production.properties</tokenFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>debug</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <tokenFile>${webapp.tokens.dir}/debug.properties</tokenFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin -->
+
+            <!--
+                Configures the minify plugin to create minified JavaScript and CSS files
+                for use within the application.
+
+                Why:  Generates CSS files from LESS files.
+                Used: Standard lifecycle, mvn process-resources.
+            -->
+            <!-- plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.7.4</version>
+                <executions>
+                    <execution>
+                        <id>min-js</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipMerge>false</skipMerge>
+                    <cssSourceDir>css</cssSourceDir>
+                    <jsSourceDir>js</jsSourceDir>
+                    <jsEngine>CLOSURE</jsEngine>
+                    <closureLanguage>ECMASCRIPT5</closureLanguage>
+                    <closureAngularPass>true</closureAngularPass>
+                    <nosuffix>false</nosuffix>
+                    <webappTargetDir>${webapp.exploded.dir}</webappTargetDir>
+                    <cssSourceIncludes>
+                        <cssSourceInclude>**</cssSourceInclude>
+                    </cssSourceIncludes>
+                    <cssSourceExcludes>
+                        <cssSourceExclude>**/*.min.css</cssSourceExclude>
+                    </cssSourceExcludes>
+                    <jsSourceIncludes>
+                        <jsSourceInclude>**</jsSourceInclude>
+                    </jsSourceIncludes>
+                    <jsSourceExcludes>
+                        <jsSourceExclude>**/*.min.js</jsSourceExclude>
+                    </jsSourceExcludes>
+                </configuration>
+            </plugin -->
+
+            <!--
+                Configures the WAR plugin to properly use the generated OSGi-compliant manifest.
+
+                Why:  Assigns some manifest data within the WARs in WAR projects. Reads bundle-generated manifest.
+                Used: Standard lifecycle, mvn package.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <webappDirectory>${webapp.exploded.dir}</webappDirectory>
+                    <archive>
+                        <manifest>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                        <manifestEntries>
+                            <name>${project.name}</name>
+                            <description>${project.description}</description>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                        </manifestEntries>
+                    </archive>
+                    <!-- this is relative to the pom.xml directory -->
+                    <webResources>
+                        <resource>
+                            <directory>${resource.work.complete.dir}</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- +=============================================== -->
+    <!-- | Section 4:  External systems                   -->
+    <!-- +=============================================== -->
+
+    <!--
+        Compensate for Maven standard variable extrapolation.
+        Git requires steady URLs (... but Subversion requires path extrapolation, hence the problem).
+     -->
+    <distributionManagement>
+        <site>
+            <id>github</id>
+            <url>${distroManagement.url}</url>
+        </site>
+    </distributionManagement>
+
+    <scm>
+        <connection>${scm.connection.url}</connection>
+        <developerConnection>${scm.devConnection.url}</developerConnection>
+        <url>${scm.url}</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- +=============================================== -->
+    <!-- | Section 5:  Profiles                           -->
+    <!-- +=============================================== -->
+    <profiles>
+        <profile>
+            <id>wildfly9_jee7</id>
+            <activation>
+                <property>
+                    <name>!jee.container</name>
+                </property>
+            </activation>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.spec.javax.ejb</groupId>
+                    <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>jboss7_as_jee6</id>
+            <activation>
+                <!-- Use the JBoss 7 AS JEE 6 profile unless another profile is defined -->
+                <property>
+                    <name>jee.container</name>
+                    <value>jboss7</value>
+                </property>
+            </activation>
+
+            <properties>
+                <!-- Persistence properties -->
+                <datasource.prefix>java:jboss/</datasource.prefix>
+            </properties>
+
+            <dependencies>
+                <!--
+                    These dependencies are included in JBoss 7.2.0.Final (and therefore specified by the
+                    jboss-javaee-6.0), so we should use provided scope for them.
+                -->
+                <!-- CDI API. -->
+                <dependency>
+                    <groupId>javax.enterprise</groupId>
+                    <artifactId>cdi-api</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+
+                <!-- Common Annotations API (JSR-250). -->
+                <dependency>
+                    <groupId>org.jboss.spec.javax.annotation</groupId>
+                    <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.spec.javax.transaction</groupId>
+                    <artifactId>jboss-transaction-api_1.1_spec</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.spec.javax.ejb</groupId>
+                    <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.spec.javax.servlet</groupId>
+                    <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!--
+            Create one environment profile for each set of tokens defined.
+        -->
+        <profile>
+            <id>development</id>
+            <activation>
+                <property>
+                    <name>environment</name>
+                    <value>development</value>
+                </property>
+            </activation>
+
+            <properties>
+                <environment.name>development</environment.name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>production</id>
+            <activation>
+                <property>
+                    <name>!environment</name>
+                </property>
+            </activation>
+
+            <properties>
+                <environment.name>production</environment.name>
+            </properties>
+        </profile>
+    </profiles>
+</project>

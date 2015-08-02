@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="page-header">
+        <h1>People DetailView
+            <small>(Quickstart AngularJS Application)</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-offset-2"></div>
+        <div class="col-sm-8">This is the detail showing the peopleDetailView.html for the AngularJS application.</div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-offset-2"></div>
+        <div class="col-sm-8">
+            <h2>Current Composer <small>(Dynamic data)</small></h2>
+            <form class="form-horizontal well well-sm" data-ng-repeat="current in people | filter:{jpaId:id}">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">ID</label>
+
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{current.jpaId}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">First Name</label>
+
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{current.firstName}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Last Name</label>
+
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{current.lastName}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Birthday</label>
+
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{current.birthday | date:'fullDate' }}</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"><a href="#/" class="btn btn-default btn-xs">Back</a></div>
+    </div>
+</div>
