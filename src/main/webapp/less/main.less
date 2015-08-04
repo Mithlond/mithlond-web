@@ -1,16 +1,14 @@
-// Define some less constants here
-@bgColor_standard: #f5f5f5;
-@borderColor_standard: #e7e7e7;
-@padding: 15px;
-@margin: 60px;
-
-// Define locally stashed type faces.
+//
+// 1. Fonts
+//    (Locally defined/downloaded TTFs for Webfonts)
+//
 @font-face {
   font-family: 'Fondamento';
   font-style: normal;
   font-weight: 400;
   src: local('Fondamento Regular'), local('Fondamento-Regular'), url('../fonts/Fondamento/Fondamento-Regular.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'Fondamento';
   font-style: italic;
@@ -18,112 +16,297 @@
   src: local('Fondamento-Italic'), url('../fonts/Fondamento/Fondamento-Italic.ttf') format('truetype');
 }
 
+//
+// 2. Palette definitions
+//    (Locally defined/downloaded TTFs for Webfonts)
+//
+@theme-headerfooter-text-color: #f5f5f5;
+@theme-headerfooter-background-color: #333;
+@theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
+@theme-headerfooter-hover-color: #777;
+@theme-headerfooter-hover-background-color: #ddd;
+@theme-headerfooter-disabled-color: #777;
+@theme-headerfooter-disabled-background-color: transparent;
+
+//
+// 3. Bootstrap overrides
+//    (Non-theme-dependent CSS overrides)
+//
+@body-padding-top: 70px;
+@body-margin-bottom: 60px;
+body {
+
+  // Required. (Body will otherwise flow under the NavBar, which is attached to the window top).
+  // By default, the NavBar is 50px high.
+  padding-top: @body-padding-top;
+
+  // Required. (Body will otherwise flow under the Footer, which is attached to the window bottom).
+  // By default, the Footer is 50px high.
+  margin-bottom: @body-margin-bottom;
+}
+
+//
+// Mixin: Page footer
+//
+.footer(
+  @footer-color: @theme-headerfooter-text-color;
+  @footer-background-color: @theme-headerfooter-background-color;
+  @footer-border-color: @theme-headerfooter-border-color;
+  @footer-container-padding: 15px;
+  @footer-height: 60px;) {
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: @footer-height;
+  background-color: @footer-background-color;
+  border: 1px solid @footer-border-color;
+  color: @footer-color;
+
+  .container {
+    padding-top: @footer-container-padding;
+    padding-right: @footer-container-padding;
+    padding-left: @footer-container-padding;
+  }
+}
+
+//
+// Mixin: Top navigation bar
+//
+.topNavBar(// Navbar colors
+  @navbar-color: @theme-headerfooter-text-color;
+  @navbar-background-color: @theme-headerfooter-background-color;
+  @navbar-border-color: @theme-headerfooter-border-color;
+  @navbar-hover-color: @theme-headerfooter-hover-color;
+  @navbar-hover-background-color: @theme-headerfooter-hover-background-color;
+  // Navbar links
+  @navbar-link-color: @theme-headerfooter-text-color;
+  @navbar-link-hover-color: @theme-headerfooter-hover-color;
+  @navbar-link-hover-bg: transparent;
+  @navbar-link-active-color: lighten(@theme-headerfooter-text-color, 10%);
+  @navbar-link-active-bg: darken(@theme-headerfooter-background-color, 6.5%);
+  @navbar-link-disabled-color: @theme-headerfooter-disabled-color;
+  @navbar-link-disabled-bg: @theme-headerfooter-disabled-background-color;
+  // Navbar toggle
+  @navbar-toggle-hover-bg: transparent;
+  @navbar-toggle-icon-bar-bg: #888;
+  @navbar-toggle-border-color: #ddd;
+  // Navbar brand label
+  @navbar-brand-color: @theme-headerfooter-text-color;
+  @navbar-brand-hover-color: darken(@theme-headerfooter-text-color, 10%);
+  @navbar-brand-hover-bg: transparent;
+) {
+
+  // Standard definitions
+  background-color: @navbar-background-color;
+  border-color: @navbar-border-color;
+  color: @navbar-color;
+
+  .navbar-brand {
+    color: @navbar-color;
+    &:hover, &:focus {
+      color: @navbar-brand-hover-color;
+      background-color: @navbar-brand-hover-bg;
+    }
+  }
+
+  .navbar-text {
+    color: @navbar-color;
+  }
+
+  .navbar-toggle {
+    border-color: @navbar-toggle-border-color;
+    &:hover,
+    &:focus {
+      background-color: @navbar-toggle-hover-bg;
+    }
+    .icon-bar {
+      background-color: @navbar-toggle-icon-bar-bg;
+    }
+  }
+
+  // Dropdown menu items
+  .navbar-nav {
+    // Remove background color from open dropdown
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: @navbar-link-active-bg;
+        color: @navbar-link-active-color;
+      }
+    }
+
+    > li > a {
+      color: @navbar-link-color;
+
+      &:hover,
+      &:focus {
+        color: @navbar-link-hover-color;
+        background-color: @navbar-link-hover-bg;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-link-active-color;
+        background-color: @navbar-link-active-bg;
+      }
+    }
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-link-disabled-color;
+        background-color: @navbar-link-disabled-bg;
+      }
+    }
+  }
+}
+
+//
+// 4. Generic
+//    (Non-theme-dependent CSS overrides)
+//
 .boldItalic() {
   font-style: italic;
   font-weight: bold;
 }
 
-body {
-  margin-bottom: @margin;
-}
+//
+// 5. Themes
+//    (Contains CSS override definitions per theme)
+//
+.stdTheme(
+  @theme-headerfooter-text-color: #77a;
+  @theme-headerfooter-background-color: #337;
+  @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
+  @theme-headerfooter-hover-color: #f5f5f5;
+  @theme-headerfooter-hover-background-color: #ddf;
+  @theme-headerfooter-disabled-color: #559;
+  @theme-headerfooter-disabled-background-color: transparent;) {
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: @margin;
-  background-color: @bgColor_standard;
-  border: 1px solid @borderColor_standard;
-}
+  #topNavBar {
+    .topNavBar(// Navbar colors
+    @theme-headerfooter-text-color;
+    @theme-headerfooter-background-color;
+    @theme-headerfooter-border-color;
+    @theme-headerfooter-hover-color;
+    @theme-headerfooter-hover-background-color;
+      // Navbar links
+    @theme-headerfooter-text-color;
+    @theme-headerfooter-hover-color;
+    transparent;
+    lighten(@theme-headerfooter-text-color, 10%);
+    darken(@theme-headerfooter-background-color, 6.5%);
+    @theme-headerfooter-disabled-color;
+    @theme-headerfooter-disabled-background-color;
+      // Navbar toggle
+    transparent;
+    #888;
+    #ddd;
+      // Navbar brand label
+    @theme-headerfooter-text-color;
+    darken(@theme-headerfooter-text-color, 10%);
+    transparent;);
+  }
 
-.footer > .container {
-  padding-top: @padding;
-  padding-right: @padding;
-  padding-left: @padding;
-}
-
-.navbar-default {
-
-  .active > a, .active > a:hover {
-    .boldItalic();
+  footer {
+    .footer(@theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color);
   }
 }
 
-// Theme CSS override definitions
-.pink {
+.sylvan {
 
-  // Define constants for this theme.
-  @bgColor_pink: #fef5f5;
-  @borderColor_pink: #f7c7c7;
-  @smallColor_pink: #aa7777;
+  // Palette definitions
+  @theme-headerfooter-text-color: #77a;
+  @theme-headerfooter-background-color: #337;
+  @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
+  @theme-headerfooter-hover-color: #f5f5f5;
+  @theme-headerfooter-hover-background-color: #ddf;
+  @theme-headerfooter-disabled-color: #559;
+  @theme-headerfooter-disabled-background-color: transparent;
 
-  small {
-    color: @smallColor_pink;
+  #topNavBar {
+    .topNavBar(// Navbar colors
+    @theme-headerfooter-text-color;
+    @theme-headerfooter-background-color;
+    @theme-headerfooter-border-color;
+    @theme-headerfooter-hover-color;
+    @theme-headerfooter-hover-background-color;
+      // Navbar links
+    @theme-headerfooter-text-color;
+    @theme-headerfooter-hover-color;
+    transparent;
+    lighten(@theme-headerfooter-text-color, 10%);
+    darken(@theme-headerfooter-background-color, 6.5%);
+    @theme-headerfooter-disabled-color;
+    @theme-headerfooter-disabled-background-color;
+      // Navbar toggle
+    transparent;
+    #888;
+    #ddd;
+      // Navbar brand label
+    @theme-headerfooter-text-color;
+    darken(@theme-headerfooter-text-color, 10%);
+    transparent;);
   }
 
-  .navbar-default {
-    background-color: @bgColor_pink;
-    border-color: @borderColor_pink;
-
-    .active > a {
-      color: @smallColor_pink;
-      background-color: @bgColor_pink;
-      .boldItalic();
-    }
-
-    .active > a:hover {
-      color: @borderColor_pink;
-      background-color: @smallColor_pink;
-      .boldItalic();
-    }
-  }
-
-  .footer {
-    background-color: @bgColor_pink;
-    border: 1px solid @borderColor_pink;
-  }
-
-  .well {
-    background-color: @bgColor_pink;
-    border-color: @borderColor_pink;
+  footer {
+    .footer(@theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color);
   }
 }
 
-.mint {
+.mellow {
 
-  // Define constants for this theme.
-  @bgColor_mint: #f5fef5;
-  @borderColor_mint: #c7f7c7;
-  @smallColor_mint: #77aa77;
-
-  small {
-    color: @smallColor_mint;
+  // Use default configured palette
+  #topNavBar {
+    .topNavBar();
   }
 
-  .navbar-default {
-    background-color: @bgColor_mint;
-    border-color: @borderColor_mint;
+  footer {
+    .footer();
+  }
+}
 
-    .active > a {
-      color: @smallColor_mint;
-      background-color: @bgColor_mint;
-      .boldItalic();
-    }
+.nazgul {
 
-    .active > a:hover {
-      color: @borderColor_mint;
-      background-color: @smallColor_mint;
-      .boldItalic();
-    }
+  // Palette definitions
+  @theme-headerfooter-text-color: #99ff99;
+  @theme-headerfooter-background-color: #444444;
+  @theme-headerfooter-border-color: #333333;
+  @theme-headerfooter-hover-color: @theme-headerfooter-text-color;
+  @theme-headerfooter-hover-background-color: @theme-headerfooter-border-color;
+  @theme-headerfooter-disabled-color: #777;
+  @theme-headerfooter-disabled-background-color: transparent;
+
+  #topNavBar {
+    .topNavBar(// Navbar colors
+    @theme-headerfooter-text-color;
+    @theme-headerfooter-background-color;
+    @theme-headerfooter-border-color;
+    @theme-headerfooter-hover-color;
+    @theme-headerfooter-hover-background-color;
+      // Navbar links
+    @theme-headerfooter-text-color;
+    @theme-headerfooter-hover-color;
+    transparent;
+    lighten(@theme-headerfooter-text-color, 10%);
+    darken(@theme-headerfooter-background-color, 6.5%);
+    @theme-headerfooter-disabled-color;
+    @theme-headerfooter-disabled-background-color;
+      // Navbar toggle
+    transparent;
+    #888;
+    #ddd;
+      // Navbar brand label
+    @theme-headerfooter-text-color;
+    darken(@theme-headerfooter-text-color, 10%);
+    transparent;);
   }
 
-  .footer {
-    background-color: @bgColor_mint;
-    border: 1px solid @borderColor_mint;
-  }
-
-  .well {
-    background-color: @bgColor_mint;
-    border-color: @borderColor_mint;
+  footer {
+    .footer(@theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color);
   }
 }

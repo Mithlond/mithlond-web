@@ -12,14 +12,14 @@
     app.config(['$routeProvider', function ($routeProvider) {
 
         // Define routes
-        $routeProvider.when('/login', {
-            templateUrl: 'app/modules/people/peopleView.html',
-            controller: 'peopleController'
+        $routeProvider.when('/news/current', {
+            templateUrl: 'app/modules/mithlond/news/current.html',
+            controller: 'mithlondController'
         }).when('/peopleDetails/:jpaId', {
-            templateUrl: 'app/modules/people/peopleDetailView.html',
-            controller: 'peopleController'
+            templateUrl: 'app/modules/mithlond/peopleDetailView.html',
+            controller: 'mithlondController'
         }).otherwise({
-            redirectTo: '/people'
+            redirectTo: '/news/current'
         });
     }
     ]);
@@ -91,11 +91,11 @@
 
         // Shared state: All available themes.
         $rootScope.themes = [
-            new $rootScope.createTheme('standard'),
-            new $rootScope.createTheme('mint'),
-            new $rootScope.createTheme('pink')];
+            new $rootScope.createTheme('mellow'),
+            new $rootScope.createTheme('nazgul'),
+            new $rootScope.createTheme('sylvan')];
 
         // Shared state: The active theme.
-        $rootScope.setTheme('mint');
+        $rootScope.setTheme('sylvan');
     }]);
 }());

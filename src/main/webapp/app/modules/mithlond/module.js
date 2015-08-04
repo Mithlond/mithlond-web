@@ -41,11 +41,11 @@ angular.module('mithlond')
             function ($scope, $routeParams, mithlond) {
 
                 // Make the members accessible in the scope
-                $scope.people = people.get();
+                $scope.mithlond = mithlond.get();
 
                 // If we have detail information, expose it in the scope.
                 if ($routeParams.jpaId != 'Undefined') {
-                    people.select($routeParams.jpaId);
+                    mithlond.select($routeParams.jpaId);
                     $scope.id = $routeParams.jpaId;
                 }
             }]);

@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="css/main.${minSuffix}css">
 
     <!-- Include JavaScript -->
-    <script type="text/javascript" src="${cdnPrefix}/jquery/${org.webjars/jquery/version}/jquery.${minSuffix}js"></script>
+    <script type="text/javascript"
+            src="${cdnPrefix}/jquery/${org.webjars/jquery/version}/jquery.${minSuffix}js"></script>
     <script type="text/javascript"
             src="${cdnPrefix}/bootstrap/${org.webjars/bootstrap/version}/js/bootstrap.${minSuffix}js"></script>
     <script type="text/javascript"
@@ -37,56 +38,82 @@
     <script type="text/javascript" src="app/modules/mithlond/module.js"></script>
 </head>
 <body data-ng-class="theme.name">
-<!-- Navbar -->
-<nav class="navbar navbar-default" role="navigation" data-bs-navbar>
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">Mithlond</a>
+<!-- Page header -->
+<header class="navbar navbar-fixed-top bs-docs-nav" id="topNavBar" role="banner">
+    <div class="container">
+        <div class="navbar-header" role="navigation">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar"
+                    aria-controls="bs-navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Mithlond</a>
+        </div>
+        <nav id="bs-navbar" class="collapse navbar-collapse" data-bs-navbar>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Nyheter <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/news/current">Nyheter</a></li>
+                        <li><a href="#/news/status">Status</a></li>
+                        <li><a href="#/news/ideas">Ideer</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Medlemmar <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/members/search">Sök medlemmar</a></li>
+                        <li><a href="#/members/reports">Rapporter och Rullan</a></li>
+                        <li><a href="#/members/admin">Administrera medlemmar</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Föreningen <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/organisation/facts">Föreningsfakta</a></li>
+                        <li><a href="#/organisation/activities">Aktiviteter</a></li>
+                        <li><a href="#/organisation/law">Lagen</a></li>
+                        <li><a href="#/organisation/posts">Ämbetsordningen</a></li>
+                        <li><a href="#/organisation/decrees">Påbud</a></li>
+                        <li><a href="#/organisation/mailinglists">ePost-listor</a></li>
+                        <li><a href="#/organisation/private/council">Rådssidor</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Inställningar <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/settings/personalInfo"><i class="fa fa-cogs fa-fw"></i> Personligt</a></li>
+                        <li><a href="#/settings/guildsGroups"><i class="fa fa-users fa-fw"></i> Gillen, Grupper</a></li>
+                        <li><a href="#/settings/allergies"><i class="fa fa-medkit fa-fw"></i> Allergier</a></li>
+                        <li><a href="#/settings/changeCredentials"><i class="fa fa-key fa-fw"></i> Ändra lösenord</a>
+                        </li>
+                        <li><a href="#/settings/themes"><i class="fa fa-picture-o fa-fw"></i> Välj tema</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false" class="text-capitalize">
+                        <i class="fa fa-picture-o fa-fw"></i>&nbsp;{{theme.name}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li data-ng-repeat="current in themes">
+                            <a data-ng-click="setTheme(current.name)">Tema: {{current.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- li><a href="#/download/client" target="_blank"><i
+                        class="fa fa-download fa-fw"></i>&nbsp;IntranetApp</a></li -->
+            </ul>
+        </nav>
     </div>
-    <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-               aria-haspopup="true" aria-expanded="false">Nyheter <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#/news">Nyheter</a></li>
-                <li><a href="#/news/status">Status</a></li>
-                <li><a href="#/news/ideas">Ideer</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-               aria-haspopup="true" aria-expanded="false">Medlemmar <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#/members">Sök medlemmar</a></li>
-                <li><a href="#/members/reports">Rapporter och Rullan</a></li>
-                <li><a href="#/members/admin">Administrera medlemmar</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-               aria-haspopup="true" aria-expanded="false">Föreningen <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#/organisation">Föreningsfakta</a></li>
-                <li><a href="#/organisation/activities">Aktiviteter</a></li>
-                <li><a href="#/organisation/law">Lagen</a></li>
-                <li><a href="#/organisation/posts">Ämbetsordningen</a></li>
-                <li><a href="#/organisation/decrees">Påbud</a></li>
-                <li><a href="#/organisation/mailinglists">ePost-listor</a></li>
-                <li><a href="#/organisation/private/council">Rådssidor</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-               aria-haspopup="true" aria-expanded="false">Inställningar <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#/settings/personalInfo"><i class="fa fa-cogs fa-fw"></i> Personligt</a></li>
-                <li><a href="#/settings/guildsGroups"><i class="fa fa-users fa-fw"></i> Gillen, Grupper</a></li>
-                <li><a href="#/settings/allergies"><i class="fa fa-medkit fa-fw"></i> Allergier</a></li>
-                <li><a href="#/settings/changeCredentials"><i class="fa fa-key fa-fw"></i> Ändra lösenord</a></li>
-                <li><a href="#/settings/themes"><i class="fa fa-picture-o fa-fw"></i> Välj tema</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
+</header>
 <div class="container">
     <div data-ng-view></div>
 </div>
