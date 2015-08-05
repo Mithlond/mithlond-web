@@ -1,7 +1,53 @@
 <div class="row">
-    <div class="col-md-4">Copyright {{'${timestamp}' | date: 'yyyy' }} Mithlond - Göteborgs Tolkiensällskap.</div>
-    <div class="col-md-4"></div>
-    <div class="col-md-4">Version: ${version} (${environment.name}),
-        Build: {{'${timestamp}' | date: 'yyyy-MM-dd HH:mm:ss' }}"
+    <div class="col-md-6">Copyright {{'${timestamp}' | date: 'yyyy' }} Mithlond - Göteborgs Tolkiensällskap.</div>
+    <div class="col-md-6">
+        <div class="pull-right">
+            <button type="button"
+                    class="btn btn-primary btn-info"
+                    data-toggle="modal"
+                    data-target="#versionInfoModal"><i class="fa fa-info-circle fa-fw"></i></button>
+            <div class="modal fade" id="versionInfoModal" tabindex="-1" role="dialog"
+                 aria-labelledby="versionInfoLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="versionInfoLabel">Om Webben</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Versionsinformationen nedan gäller presentationen, inte tjänsterna som fyller
+                                presentationen med innehåll/data.</p>
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Värde</th>
+                                    <th>Beskrivning</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Version</th>
+                                    <td>${version}</td>
+                                    <td>Releaseversion; defineras i Maven's POM.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Byggtid</th>
+                                    <td>{{'${timestamp}' | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                                    <td>Tidpunkt då webapplikationen kompilerades.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Miljö</th>
+                                    <td>${environment.name}</td>
+                                    <td>Miljö-parametrisering, given vid bygget.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

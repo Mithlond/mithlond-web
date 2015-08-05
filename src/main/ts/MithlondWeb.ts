@@ -1,11 +1,17 @@
-(function () {
+// <reference path="../typings/angularjs/angular.d.ts"/>
+
+module MithlondWebApp {
     'use strict';
 
     // 1) Instantiate all dependency module instances.
-    angular.module('people', []);
+    angular.module('mithlond', []);
+
+    export var getModule: () => ng.IModule = () => {
+        return angular.module("myModule");
+    }
 
     // 2) Create application instance; inject dependency module references.
-    var app = angular.module('MithlondWebApp', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'people']);
+    var app = angular.module('MithlondWebApp', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'mithlond']);
 
     // 3) Configure the application.
     //    ("Constructor" call, invoked before scopes are defined/injected.)
@@ -98,4 +104,4 @@
         // Shared state: The active theme.
         $rootScope.setTheme('mint');
     }]);
-}());
+}
