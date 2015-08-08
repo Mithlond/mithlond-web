@@ -96,6 +96,6 @@
             new $rootScope.createTheme('sylvan')];
 
         // Shared state: The active theme.
-        $rootScope.setTheme('sylvan');
+        $rootScope.setTheme('mellow');
     }]);
 }());

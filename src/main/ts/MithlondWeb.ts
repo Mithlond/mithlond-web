@@ -6,9 +6,9 @@ module MithlondWebApp {
     // 1) Instantiate all dependency module instances.
     angular.module('mithlond', []);
 
-    export var getModule: () => ng.IModule = () => {
+    export var getModule:() => ng.IModule = () => {
         return angular.module("myModule");
-    }
+    };
 
     // 2) Create application instance; inject dependency module references.
     var app = angular.module('MithlondWebApp', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'mithlond']);

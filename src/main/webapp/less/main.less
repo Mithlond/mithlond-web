@@ -127,6 +127,7 @@ body {
 
   // Dropdown menu items
   .navbar-nav {
+
     // Remove background color from open dropdown
     > .open > a {
       &,
@@ -198,24 +199,7 @@ body {
 
   #topNavBar {
     .topNavBar(
-    @theme-headerfooter-text-color;
-    @theme-headerfooter-background-color;
-    @theme-headerfooter-border-color;
-    @theme-headerfooter-hover-color;
-    @theme-headerfooter-hover-background-color;
-    @theme-headerfooter-text-color;
-    @theme-headerfooter-hover-color;
-    transparent;
-    lighten(@theme-headerfooter-text-color, 10%);
-    darken(@theme-headerfooter-background-color, 6.5%);
-    @theme-headerfooter-disabled-color;
-    @theme-headerfooter-disabled-background-color;
-    transparent;
-    #888;
-    #ddd;
-    @theme-headerfooter-text-color;
-    darken(@theme-headerfooter-text-color, 10%);
-    transparent;
+    @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-text-color; @theme-headerfooter-hover-color; transparent; lighten(@theme-headerfooter-text-color, 10%); darken(@theme-headerfooter-background-color, 6.5%); @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; transparent; #888; #ddd; @theme-headerfooter-text-color; darken(@theme-headerfooter-text-color, 10%); transparent;
     );
   }
 
@@ -245,14 +229,16 @@ body {
 
 .mellow {
 
-  // Use default configured palette
-  #topNavBar {
-    .topNavBar();
-  }
+  // Palette definitions
+  @theme-headerfooter-text-color: #78a5cc;
+  @theme-headerfooter-background-color: #2a313b;
+  @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
+  @theme-headerfooter-hover-color: #78a5cc;
+  @theme-headerfooter-hover-background-color: #d6e6f5;
+  @theme-headerfooter-disabled-color: #559;
+  @theme-headerfooter-disabled-background-color: transparent;
 
-  footer {
-    .footer();
-  }
+  .stdTheme('mellow'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color);
 }
 
 .nazgul {
