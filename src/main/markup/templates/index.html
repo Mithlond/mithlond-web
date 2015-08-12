@@ -115,7 +115,103 @@
     </div>
 </header>
 <div id="mainContainer" class="container">
-    <div data-ng-view></div>
+    <div class="row">
+        <div class="col-md-3 dropshadow contentContainer">
+            <!-- Start Boxes Iteration -->
+            <div id="leftColumnSidebar">
+                <div class="box">
+                    <h2>Dina Tillgångar</h2>
+                    <div class="box_content">
+                        <div>Tillgångar visas positivt, skulder negativt.<br/>
+                            <table class="table table-condensed table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Konto</th>
+                                    <th>Belopp</th>
+                                    <th>Valuta</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><span>Mithlond</span></td>
+                                    <td><span style="margin-left:5px">42,5</span></td>
+                                    <td style="padding-left:5px">(<span>SEK</span>)</td>
+                                </tr>
+                                <tr>
+                                    <td><span>Mithlonds Barnota</span></td>
+                                    <td><span style="margin-left:5px">190</span></td>
+                                    <td style="padding-left:5px">(<span>SEK</span>)</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_title"><span>Skall vi fira?</span></div>
+                    <div class="box_content">
+                        <div>Födelsedagar inom <span>30</span> dagar:<br/>
+                            <table class="table table-condensed table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Alias</th>
+                                    <th>Födelsedag</th>
+                                    <th>Ålder</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <!-- td><strong><a href="#" wicket:id="membersPage"><span wicket:id="alias"/></a></strong></td -->
+                                    <td><span>Lochiel</span></td>
+                                    <td><span style="margin-left:5px">1972-08-14</span></td>
+                                    <td style="padding-left:5px"><span>43</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- td><strong><a href="#" wicket:id="membersPage"><span wicket:id="alias"/></a></strong></td -->
+                                    <td><span>Calenestel</span></td>
+                                    <td><span style="margin-left:5px">1983-08-20</span></td>
+                                    <td style="padding-left:5px"><span>32</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- td><strong><a href="#" wicket:id="membersPage"><span wicket:id="alias"/></a></strong></td -->
+                                    <td><span>Valnaur</span></td>
+                                    <td><span style="margin-left:5px">1982-08-21</span></td>
+                                    <td style="padding-left:5px"><span>33</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- td><strong><a href="#" wicket:id="membersPage"><span wicket:id="alias"/></a></strong></td -->
+                                    <td><span>Ungoliant</span></td>
+                                    <td><span style="margin-left:5px">1970-08-23</span></td>
+                                    <td style="padding-left:5px"><span>45</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- td><strong><a href="#" wicket:id="membersPage"><span wicket:id="alias"/></a></strong></td -->
+                                    <td><span>Fredegar Bo...</span></td>
+                                    <td><span style="margin-left:5px">1972-08-30</span></td>
+                                    <td style="padding-left:5px"><span>43</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- td><strong><a href="#" wicket:id="membersPage"><span wicket:id="alias"/></a></strong></td -->
+                                    <td><span>Yelinwe</span></td>
+                                    <td><span style="margin-left:5px">1978-09-06</span></td>
+                                    <td style="padding-left:5px"><span>37</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- td><strong><a href="#" wicket:id="membersPage"><span wicket:id="alias"/></a></strong></td -->
+                                    <td><span>Ellindele</span></td>
+                                    <td><span style="margin-left:5px">1976-09-07</span></td>
+                                    <td style="padding-left:5px"><span>39</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Boxes Iteration -->
+        </div>
+        <div id="mainContent" class="col-md-9" data-ng-view></div>
+    </div>
 </div>
 <footer class="footer">
     <div class="container">

@@ -32,6 +32,11 @@
 // 3. Bootstrap overrides
 //    (Non-theme-dependent CSS overrides)
 //
+html {
+  min-height: 100%;
+  position: relative;
+}
+
 @body-padding-top: 70px;
 @body-margin-bottom: 60px;
 body {
@@ -166,6 +171,22 @@ body {
   }
 }
 
+.sections(
+  @sections-color;
+  @sections-margin-bottom;
+  @sections-font-weight;
+  @sections-font-family;
+) {
+  h1, h2, h3, h4, h5, h6 {
+    color: @sections-color;
+    margin-bottom: @sections-margin-bottom;
+    font-weight: @sections-font-weight;
+
+    // Only affect the font-family if an argument was actually passed.
+    font-family: @sections-font-family when (isstring(@sections-font-family));
+  }
+}
+
 //
 // 4. Generic
 //    (Non-theme-dependent CSS overrides)
@@ -175,26 +196,105 @@ body {
   font-weight: bold;
 }
 
+.contentContainer(
+  @content-container-border-width: 5px;
+  @content-container-border-color: #333333;
+  @content-container-background-color: #444444;
+  @content-container-padding: 10px 10px 0 10px;
+) {
+  border: @content-container-border-width solid @content-container-border-color;
+  border-radius: @content-container-border-width;
+  background-color: @content-container-background-color;
+  padding: @content-container-padding;
+}
+
+.dropshadow(
+  @dropshadow-horizontal-shadow: 10px;
+  @dropshadow-vertical-shadow: 10px;
+  @dropshadow-blur: 40px;
+  @dropshadow-spread: 4px;
+  @dropshadow-color: #113311;
+) {
+  // h-shadow v-shadow blur spread color
+  -webkit-box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  box-shadow: @arguments;
+}
+
+.infobox(
+  @infobox-title-font-size: 14pt;
+  @infobox-title-font-weight: 400;
+  @infobox-title-font-family: 'Fondamento', cursive;
+  @infobox-title-padding: 6px 10px;
+  @infobox-title-border-color: 1px solid #444444 #333333 #333333 #444444;
+  @infobox-text-color: #eeffee;
+  @infobox-background-color: #222222;
+) {
+
+  // Each infobox has a title and a content area
+  // Standard formatting
+  margin-bottom: 0.6em;
+
+  .title {
+
+    color: @infobox-text-color;
+    background: #222222;
+
+    // Padding and border
+    border: @infobox-title-border-color;
+    border-radius: 5px;
+    padding: @infobox-title-padding;
+
+    // Define the font
+    font-family: @infobox-title-font-family when (isstring(@infobox-title-font-family));
+    font-weight: @infobox-title-font-weight;
+    font-size: @infobox-title-font-size;
+  }
+
+  .content {
+    color: @infobox-text-color;
+    padding: 8px 0 8px;
+  }
+
+  .li:first-child {
+    border-top: none;
+  }
+}
+
 //
 // 5. Themes
 //    (Contains CSS override definitions per theme)
 //
 .stdTheme(
   @theme-name;
-  @theme-headerfooter-text-color: #77a;
-  @theme-headerfooter-background-color: #337;
+  @theme-headerfooter-text-color;
+  @theme-headerfooter-background-color;
   @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
-  @theme-headerfooter-hover-color: #f5f5f5;
-  @theme-headerfooter-hover-background-color: #ddf;
-  @theme-headerfooter-disabled-color: #559;
-  @theme-headerfooter-disabled-background-color: transparent;) {
+  @theme-headerfooter-hover-color;
+  @theme-headerfooter-hover-background-color;
+  @theme-headerfooter-disabled-color;
+  @theme-headerfooter-disabled-background-color: transparent;
+  @theme-mainContainer-transparency: 0.7;) {
 
   // Standard definitions
   @theme-background-image: '../themes/@{theme-name}/image/background-image.jpg';
-  background-image: url(@theme-background-image);
+  background: url(@theme-background-image) no-repeat fixed;
   background-size: cover;
+
+  // Page structure elements definition.
   #mainContainer {
-    background: rgba(255, 255, 255, .9);
+
+    // The left-column sidebar contains snippets of quick information
+    #leftColumnSidebar {
+      background: rgba(255, 255, 255, @theme-mainContainer-transparency);
+      border-radius: 5px;
+    }
+
+    // The main content div contains the main information on the page.
+    #mainContent {
+      background: rgba(255, 255, 255, @theme-mainContainer-transparency);
+      border-radius: 5px;
+    }
   }
 
   #topNavBar {
@@ -208,8 +308,8 @@ body {
   }
 
   .modal-content {
-    color: @theme-headerfooter-background-color;
-    background-color: @theme-headerfooter-hover-color;
+    color: @theme-headerfooter-text-color;
+    background-color: @theme-headerfooter-background-color;
   }
 }
 
@@ -225,9 +325,16 @@ body {
   @theme-headerfooter-disabled-background-color: transparent;
 
   .stdTheme('sylvan'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color);
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #444480;
+    margin-bottom: 0.3em;
+    font-family: 'Fondamento', cursive;
+    font-weight: 400;
+  }
 }
 
-.mellow {
+.ocean {
 
   // Palette definitions
   @theme-headerfooter-text-color: #78a5cc;
@@ -238,19 +345,54 @@ body {
   @theme-headerfooter-disabled-color: #559;
   @theme-headerfooter-disabled-background-color: transparent;
 
-  .stdTheme('mellow'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color);
+  .stdTheme('ocean'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color);
 }
 
 .nazgul {
 
   // Palette definitions
   @theme-headerfooter-text-color: #99ff99;
-  @theme-headerfooter-background-color: #444444;
-  @theme-headerfooter-border-color: #333333;
-  @theme-headerfooter-hover-color: @theme-headerfooter-text-color;
-  @theme-headerfooter-hover-background-color: @theme-headerfooter-border-color;
-  @theme-headerfooter-disabled-color: #777;
+  @theme-headerfooter-background-color: #333333;
+  @theme-headerfooter-border-color: #111111;
+  @theme-headerfooter-hover-color: #333333;
+  @theme-headerfooter-hover-background-color: #bbffbb;
+  @theme-headerfooter-disabled-color: #bbbbbb;
   @theme-headerfooter-disabled-background-color: transparent;
+  @theme-mainContainer-transparency: 0.7;
 
-  .stdTheme('nazgul'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color);
+  .stdTheme('nazgul'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; @theme-mainContainer-transparency;);
+
+  // Use a green, stylish font for headings.
+  .sections(#3D733D; 0.3em; 400; 'Fondamento', cursive;);
+
+  // Outline the content containers
+  .contentContainer {
+
+    // Fire the macro to create the content container.
+    .contentContainer(5px; #333333; #444444; 10px 10px 0 10px;);
+
+    // Add a nazgul-style, green drop shadow.
+    .dropshadow(10px; 10px; 30px; 10px; #008000;);
+
+    // Add formatting for infobox and articles
+    .infobox {
+      .infobox(14pt; 400; 'Fondamento', cursive; 6px 10px; 1px solid #444444 #333333 #333333 #444444; #eeffee; #222222;);
+    }
+  }
+
+  // Style the text parts of the page.
+  #mainContainer {
+
+    // The left-column sidebar contains snippets of quick information
+    #leftColumnSidebar {
+      background: rgba(0, 0, 0, @theme-mainContainer-transparency);
+      border-radius: 5px;
+    }
+
+    // The main content div contains the main information on the page.
+    #mainContent {
+      background: rgba(0, 0, 0, @theme-mainContainer-transparency);
+      border-radius: 5px;
+    }
+  }
 }

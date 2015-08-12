@@ -15,8 +15,8 @@
         $routeProvider.when('/news/current', {
             templateUrl: 'app/modules/mithlond/news/current.html',
             controller: 'mithlondController'
-        }).when('/peopleDetails/:jpaId', {
-            templateUrl: 'app/modules/mithlond/peopleDetailView.html',
+        }).when('/news/status', {
+            templateUrl: 'app/modules/mithlond/news/status.html',
             controller: 'mithlondController'
         }).otherwise({
             redirectTo: '/news/current'
@@ -91,11 +91,11 @@
 
         // Shared state: All available themes.
         $rootScope.themes = [
-            new $rootScope.createTheme('mellow'),
             new $rootScope.createTheme('nazgul'),
+            new $rootScope.createTheme('ocean'),
             new $rootScope.createTheme('sylvan')];
 
         // Shared state: The active theme.
-        $rootScope.setTheme('mellow');
+        $rootScope.setTheme('ocean');
     }]);
 }());
