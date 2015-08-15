@@ -1,47 +1,85 @@
-angular.module('mithlond')
-        .factory('mithlond', function () {
+var mithlond = angular.module('mithlond', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'ngResource']);
+
+mithlond.factory('mithlond', function ($resource) {
 
             // Internal state
             // TODO: Replace this static data by data retrieved from WebSocket call.
             var menus = [{}];
-            var selected = -1;
+            var selected = "";
 
             // Public accessors
             return {
 
-                get: function () {
-                    return people;
-                },
-
-                select: function (jpaId) {
-                    selected = jpaId;
-                },
-
-                find: function (index) {
-                    return people[index];
+                /**
+                 * Retrieves the menus.
+                 *
+                 * @returns {*[]} An array containing Menu Objects, and sub-arrays containing sub-menus.
+                 */
+                getMenus: function () {
+                    return menus;
                 }
             };
         })
-        .directive('article', ['$scope', function ($scope) {
-
+        .directive('articles', ['$scope', function($scope) {
             /*
-             <article>
-             <title>...</title>
-             <author>...</author>
-             <created>...</created>
-             <content>...</content>
-             </article>
+             <articles category="mithlond/news">
+                <article
+                    title="Some title"
+                    author="Das Häxxmästare"
+                    created="2015-02-15 15:43>
+                </article>
+             </articles>
              */
-
             return {
                 restrict: 'E',
                 transclude: true,
                 scope: {
-                    title: '@',
-                    author: '@'
+                    category: '@'
                 },
                 replace: true,
-                /*controller: function ($scope, $element) {
+                controller: function ($scope, $element) {
+
+                    // Internal state
+                    var articles = $scope.articles = [];
+
+                    $scope.select = function (pane) {
+                        angular.forEach(panes, function (pane) {
+                            pane.selected = false;
+                        });
+                        pane.selected = true;
+                    };
+
+                    this.addArticle = function (article) {
+                        articles.push(pane);
+                    }
+                },
+                template: '<div class="article">'
+                + '<div class="article_title">{{}}</div></div>'
+            }
+        }])
+        .directive('article', ['$scope', function ($scope) {
+            /*
+             <articles category="mithlond/news">
+                <article
+                    title="Some title"
+                    author="Das Häxxmästare"
+                    created="2015-02-15 15:43>
+                    ...
+                </article>
+             </articles>
+             */
+
+            return {
+                restrict: 'E',
+                require: '^articles',
+                transclude: true,
+                scope: {
+                    title: '@',
+                    author: '@',
+                    created: '@'
+                },
+                replace: true,
+                controller: function ($scope, $element) {
 
                     $scope.select = function (pane) {
                         angular.forEach(panes, function (pane) {
@@ -56,55 +94,9 @@ angular.module('mithlond')
                         }
                         panes.push(pane);
                     }
-                },  */
-                template: '<div class="article" data-ng-transclude></div>'
-            }
-        }])
-        .directive('author', [function () {
-            return {
-                restrict: 'E',
-                require: '^article',
-                transclude: true,
-                scope: {},
-                controller: function ($scope, $element) {},
-                replace: true,
-                template: '<div class="author" data-ng-transclude></div>'
-            }
-        }])
-        .directive('created', [function () {
-
-            /*
-             <article>
-             <author>...</author>
-             <created>...</created>
-             <content>...</content>
-             </article>
-             */
-
-            return {
-                restrict: 'E',
-                require: '^article',
-                transclude: true,
-                scope: {},
-                controller: function ($scope, $element) {},
-                replace: true,
-                template: '<div class="created" data-ng-transclude></div>'
-            }
-        }])
-        .directive('content', [function () {
-
-            /*
-             <article>
-             <author>...</author>
-             <created>...</created>
-             <content>...</content>
-             </article>
-             */
-
-            return {
-                restrict: 'E',
-                transclude: true,
-                scope: {},
+                },
+                template: '<div class="article">'
+                + '<div class="article_title">{{}}</div></div>'
             }
         }])
         .controller('mithlondController', ['$scope', '$routeParams', 'mithlond',
