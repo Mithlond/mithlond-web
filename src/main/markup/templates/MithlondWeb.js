@@ -1,12 +1,11 @@
-// <reference path="../typings/angularjs/angular.d.ts"/>
+var MithlondWebApp;
 
-module MithlondWebApp {
+(function (MithlondWebApp) {
     'use strict';
 
     // 1) Instantiate all dependency module instances.
     angular.module('mithlond', []);
-
-    export var getModule:() => ng.IModule = () => {
+    MithlondWebApp.getModule = function () {
         return angular.module("myModule");
     };
 
@@ -16,7 +15,6 @@ module MithlondWebApp {
     // 3) Configure the application.
     //    ("Constructor" call, invoked before scopes are defined/injected.)
     app.config(['$routeProvider', function ($routeProvider) {
-
         // Define routes
         $routeProvider.when('/login', {
             templateUrl: 'app/modules/people/peopleView.html',
@@ -27,13 +25,11 @@ module MithlondWebApp {
         }).otherwise({
             redirectTo: '/people'
         });
-    }
-    ]);
+    }]);
 
     // 4) Initialize the application's rootScope state.
     //    ("Constructor" call, invoked *after* scopes are defined/injected.)
     app.run(['$http', '$rootScope', function ($http, $rootScope) {
-
         /**
          * Singleton function for creating a Theme structure.
          *
@@ -68,7 +64,7 @@ module MithlondWebApp {
              */
             this.topNavBar = function () {
                 return 'app/shared/theme/' + this.structureID + '/topNavbar.html';
-            }
+            };
         };
 
         /**
@@ -77,17 +73,12 @@ module MithlondWebApp {
          * @param themeName The name of the theme to select.
          */
         $rootScope.setTheme = new function (themeName) {
-
             // Check sanity
             if (typeof themeName === 'string' || themeName instanceof String) {
-
-                // Find the theme with the supplied name
                 for (var i = 0; i < $rootScope.themes.length; i++) {
                     if ($rootScope.themes[i].name == themeName) {
-
                         // Set the new (?) theme
                         $rootScope.theme = $rootScope.themes[i];
-
                         // All done.
                         return;
                     }
@@ -99,9 +90,11 @@ module MithlondWebApp {
         $rootScope.themes = [
             new $rootScope.createTheme('standard'),
             new $rootScope.createTheme('mint'),
-            new $rootScope.createTheme('pink')];
+            new $rootScope.createTheme('pink')
+        ];
 
         // Shared state: The active theme.
         $rootScope.setTheme('mint');
     }]);
-}
+
+})(MithlondWebApp || (MithlondWebApp = {}));

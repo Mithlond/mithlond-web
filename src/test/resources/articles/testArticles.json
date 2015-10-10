@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Some title",
+    "author": 'Häxmästaren',
+    "created": "2015-02-15 15:43",
+    "markupContent" : "<p>Text för artikel 1 i en p.</p><p>Text för artikel 1 i en annan p.</p>"
+  },
+  {
+    "title": "Another title",
+    "author": 'Häxmästaren',
+    "created": "2015-03-03 14:22",
+    "markupContent" : "<p>Text för artikel 2 i en p.</p><p>Text för artikel 2 i en annan p.</p>"
+  }
+]

@@ -97,5 +97,8 @@
 
         // Shared state: The active theme.
         $rootScope.setTheme('ocean');
+
+        // Shared state: The organisation name.
+        $rootScope.organisation = 'Mithlond';
     }]);
 }());
