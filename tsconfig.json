@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "system",
+    "moduleResolution": "node",
+    "sourceRoot": "src/main/typescript/app",
+    "sourceMap": true,
+    "outDir": "target/exploded/webapp.war",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "path": "src/main/typescript/typedefinitions",
+    "bundle": "src/main/typescript/typedefinitions/tsd.d.ts"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "version": "v4"
+}

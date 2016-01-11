@@ -1,0 +1,31 @@
+{
+  "name": "mithlond-web",
+  "version": "1.0.0-SNAPSHOT",
+  "description": "Mithlond: Presentation WAR",
+  "main": "index.html",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.1.1",
+    "gulp-uglify": "^1.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-less": "^3.0.5",
+    "typescript": "^1.7.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Mithlond/mithlond-web.git"
+  },
+  "keywords": [
+    "mithlond"
+  ],
+  "author": "Lennart Jörelid",
+  "license": "Apache 2",
+  "bugs": {
+    "url": "https://github.com/Mithlond/mithlond-web/issues"
+  },
+  "homepage": "https://github.com/Mithlond/mithlond-web#readme"
+}

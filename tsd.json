@@ -1,0 +1,15 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "bundle": "src/main/typescript/typedefinitions/defs.d.ts",
+  "path": "src/main/typescript/typedefinitions",
+  "installed": {
+    "angularjs/angular.d.ts": {
+      "commit": "4639f126d25956b6a7ddf8462dd4e73101983b85"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "4639f126d25956b6a7ddf8462dd4e73101983b85"
+    }
+  }
+}
