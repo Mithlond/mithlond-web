@@ -34,8 +34,9 @@
             src="${cdnPrefix}/angular-strap/${org.webjars/angular-strap/version}/angular-strap.tpl.${minSuffix}js"></script>
 
     <!-- Include the AngularJS application and all its Modules. -->
-    <script type="text/javascript" src="app/MithlondWeb.js"></script>
-    <script type="text/javascript" src="app/service/ThemeService.js"></script>
+    <script type="text/javascript" src="app/modules/articles/module.js"></script>
+    <script type="text/javascript" src="app/modules/mithlond/module.js"></script>
+    <script type="text/javascript" src="app/mithlond.js"></script>
 </head>
 <body data-ng-class="theme.name">
 <!-- Page header -->
@@ -49,7 +50,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">Mithlond</a>
+            <a class="navbar-brand">{{organisation}}</a>
         </div>
         <nav id="bs-navbar" class="collapse navbar-collapse" data-bs-navbar>
             <ul class="nav navbar-nav">
@@ -104,7 +105,7 @@
                         <i class="fa fa-picture-o fa-fw"></i>&nbsp;{{theme.name}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li data-ng-repeat="current in themes">
-                            <a data-ng-click="setTheme(current.name)">Tema: {{current.name}}</a>
+                            <a href="" data-ng-click="setTheme(current.name)">Tema: {{current.name}}</a>
                         </li>
                     </ul>
                 </li>
@@ -119,9 +120,9 @@
         <div class="col-md-3 dropshadow contentContainer">
             <!-- Start Boxes Iteration -->
             <div id="leftColumnSidebar">
-                <div class="box">
-                    <h2>Dina Tillgångar</h2>
-                    <div class="box_content">
+                <div class="infobox">
+                    <div class="title">Dina Tillgångar</div>
+                    <div class="content">
                         <div>Tillgångar visas positivt, skulder negativt.<br/>
                             <table class="table table-condensed table-hover">
                                 <thead>
@@ -147,9 +148,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="box">
-                    <div class="box_title"><span>Skall vi fira?</span></div>
-                    <div class="box_content">
+                <div class="infobox">
+                    <div class="title"><span>Skall vi fira?</span></div>
+                    <div class="content">
                         <div>Födelsedagar inom <span>30</span> dagar:<br/>
                             <table class="table table-condensed table-hover">
                                 <thead>
@@ -210,7 +211,7 @@
             </div>
             <!-- End Boxes Iteration -->
         </div>
-        <div id="mainContent" class="col-md-9" data-ng-view></div>
+        <div id="mainContent" class="col-md-9 dropshadow contentContainer" data-ng-view></div>
     </div>
 </div>
 <footer class="footer">

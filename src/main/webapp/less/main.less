@@ -199,7 +199,7 @@ body {
 .contentContainer(
   @content-container-border-width: 5px;
   @content-container-border-color: #333333;
-  @content-container-background-color: #444444;
+  @content-container-background-color: #eeeeee;
   @content-container-padding: 10px 10px 0 10px;
 ) {
   border: @content-container-border-width solid @content-container-border-color;
@@ -226,7 +226,10 @@ body {
   @infobox-title-font-weight: 400;
   @infobox-title-font-family: 'Fondamento', cursive;
   @infobox-title-padding: 6px 10px;
-  @infobox-title-border-color: 1px solid #444444 #333333 #333333 #444444;
+  @infobox-title-border: 1px solid;
+  @infobox-title-border-color: #444444 #333333 #333333 #444444;
+  @infobox-title-color: #eeffee;
+  @infobox-title-background-color: #E5E5E5;
   @infobox-text-color: #eeffee;
   @infobox-background-color: #222222;
 ) {
@@ -236,12 +239,12 @@ body {
   margin-bottom: 0.6em;
 
   .title {
-
-    color: @infobox-text-color;
-    background: #222222;
+    color: @infobox-title-color;
+    background: @infobox-title-background-color;
 
     // Padding and border
-    border: @infobox-title-border-color;
+    border: @infobox-title-border;
+    border-color: @infobox-title-border-color;
     border-radius: 5px;
     padding: @infobox-title-padding;
 
@@ -274,32 +277,50 @@ body {
   @theme-headerfooter-hover-background-color;
   @theme-headerfooter-disabled-color;
   @theme-headerfooter-disabled-background-color: transparent;
-  @theme-mainContainer-transparency: 0.7;) {
+  @theme-mainContainer-transparency: 0.7;
+  @theme-text-background;
+  @theme-text-color;
+  @theme-title-background-color;
+  @theme-header-font-family: 'Ubuntu', sans-serif;) {
 
   // Standard definitions
   @theme-background-image: '../themes/@{theme-name}/image/background-image.jpg';
   background: url(@theme-background-image) no-repeat fixed;
   background-size: cover;
 
+  // Outline the content containers
+  .contentContainer {
+
+    // Fire the macro to create the content container.
+    .contentContainer(5px; @theme-title-background-color; rgba(255, 255, 255, @theme-mainContainer-transparency); 10px 10px 0 10px;);
+
+    // Add a standardized drop shadow.
+    .dropshadow(10px; 10px; 30px; 10px; @theme-headerfooter-background-color;);
+
+    // Add formatting for infobox and articles
+    .infobox {
+      .infobox(14pt; 400; @theme-header-font-family; 6px 10px; 1px solid; @theme-headerfooter-border-color; @theme-title-background-color; @theme-text-color; @theme-title-background-color;);
+    }
+  }
+
   // Page structure elements definition.
   #mainContainer {
 
     // The left-column sidebar contains snippets of quick information
     #leftColumnSidebar {
-      background: rgba(255, 255, 255, @theme-mainContainer-transparency);
       border-radius: 5px;
     }
 
     // The main content div contains the main information on the page.
     #mainContent {
-      background: rgba(255, 255, 255, @theme-mainContainer-transparency);
       border-radius: 5px;
+      margin-left: 30px;
     }
   }
 
   #topNavBar {
     .topNavBar(
-    @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-text-color; @theme-headerfooter-hover-color; transparent; lighten(@theme-headerfooter-text-color, 10%); darken(@theme-headerfooter-background-color, 6.5%); @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; transparent; #888; #ddd; @theme-headerfooter-text-color; darken(@theme-headerfooter-text-color, 10%); transparent;
+            @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-text-color; @theme-headerfooter-hover-color; transparent; lighten(@theme-headerfooter-text-color, 10%); darken(@theme-headerfooter-background-color, 6.5%); @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; transparent; #888; #ddd; @theme-headerfooter-text-color; darken(@theme-headerfooter-text-color, 10%); transparent;
     );
   }
 
@@ -316,6 +337,7 @@ body {
 .sylvan {
 
   // Palette definitions
+  @theme-text-color: #2F455F;
   @theme-headerfooter-text-color: #94DFFF;
   @theme-headerfooter-background-color: #3B5A77;
   @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
@@ -324,7 +346,7 @@ body {
   @theme-headerfooter-disabled-color: #559;
   @theme-headerfooter-disabled-background-color: transparent;
 
-  .stdTheme('sylvan'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color);
+  .stdTheme('sylvan'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; 0.7; #f5f5f5; @theme-text-color; @theme-headerfooter-background-color; 'Fondamento', cursive;);
 
   h1, h2, h3, h4, h5, h6 {
     color: #444480;
@@ -337,6 +359,7 @@ body {
 .ocean {
 
   // Palette definitions
+  @theme-text-color: #2F455F;
   @theme-headerfooter-text-color: #78a5cc;
   @theme-headerfooter-background-color: #2a313b;
   @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
@@ -345,12 +368,28 @@ body {
   @theme-headerfooter-disabled-color: #559;
   @theme-headerfooter-disabled-background-color: transparent;
 
-  .stdTheme('ocean'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color);
+  .stdTheme('ocean'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; 0.7; #f5f5f5; @theme-text-color; @theme-headerfooter-background-color; 'Ubuntu', sans-serif;);
+}
+
+.silly {
+
+  // Palette definitions
+  @theme-text-color: #2F455F;
+  @theme-headerfooter-text-color: #ccaea5;
+  @theme-headerfooter-background-color: #2a313b;
+  @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
+  @theme-headerfooter-hover-color: #A68984;
+  @theme-headerfooter-hover-background-color: #D2ADA8;
+  @theme-headerfooter-disabled-color: #559;
+  @theme-headerfooter-disabled-background-color: transparent;
+
+  .stdTheme('silly'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; 0.7; #f5f5f5; @theme-text-color; @theme-headerfooter-background-color; 'Ubuntu', sans-serif;);
 }
 
 .nazgul {
 
   // Palette definitions
+  @theme-text-color: #eeffee;
   @theme-headerfooter-text-color: #99ff99;
   @theme-headerfooter-background-color: #333333;
   @theme-headerfooter-border-color: #111111;
@@ -360,7 +399,7 @@ body {
   @theme-headerfooter-disabled-background-color: transparent;
   @theme-mainContainer-transparency: 0.7;
 
-  .stdTheme('nazgul'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; @theme-mainContainer-transparency;);
+  .stdTheme('nazgul'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; @theme-mainContainer-transparency; #f5f5f5; @theme-text-color; @theme-headerfooter-background-color; 'Fondamento', cursive;);
 
   // Use a green, stylish font for headings.
   .sections(#3D733D; 0.3em; 400; 'Fondamento', cursive;);
@@ -377,22 +416,6 @@ body {
     // Add formatting for infobox and articles
     .infobox {
       .infobox(14pt; 400; 'Fondamento', cursive; 6px 10px; 1px solid #444444 #333333 #333333 #444444; #eeffee; #222222;);
-    }
-  }
-
-  // Style the text parts of the page.
-  #mainContainer {
-
-    // The left-column sidebar contains snippets of quick information
-    #leftColumnSidebar {
-      background: rgba(0, 0, 0, @theme-mainContainer-transparency);
-      border-radius: 5px;
-    }
-
-    // The main content div contains the main information on the page.
-    #mainContent {
-      background: rgba(0, 0, 0, @theme-mainContainer-transparency);
-      border-radius: 5px;
     }
   }
 }

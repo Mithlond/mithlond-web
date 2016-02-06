@@ -2,10 +2,11 @@
     'use strict';
 
     // 1) Instantiate all dependency module instances.
+    angular.module('articleService', []);
     angular.module('mithlond', []);
 
     // 2) Create application instance; inject dependency module references.
-    var app = angular.module('MithlondWebApp', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'mithlond']);
+    var app = angular.module('mithlond-web', ['ngRoute', 'ngSanitize', 'mgcrea.ngStrap', 'mithlond']);
 
     // 3) Configure the application.
     //    ("Constructor" call, invoked before scopes are defined/injected.)
@@ -21,15 +22,14 @@
         }).otherwise({
             redirectTo: '/news/current'
         });
-    }
-    ]);
+    }]);
 
     // 4) Initialize the application's rootScope state.
     //    ("Constructor" call, invoked *after* scopes are defined/injected.)
     app.run(['$http', '$rootScope', function ($http, $rootScope) {
 
         /**
-         * Singleton function for creating a Theme structure.
+         * Function creating a Theme structure.
          *
          * @param name The name of the returned Theme. Must not contain whitespace, and should be a
          * legal CSS class name. The name of the selected theme is added as a CSS class to the 'body' element.
@@ -93,6 +93,7 @@
         $rootScope.themes = [
             new $rootScope.createTheme('nazgul'),
             new $rootScope.createTheme('ocean'),
+            new $rootScope.createTheme('silly'),
             new $rootScope.createTheme('sylvan')];
 
         // Shared state: The active theme.

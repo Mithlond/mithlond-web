@@ -9,7 +9,7 @@
     <!--
         Define the security constraints used within the Web Application.
     -->
-    <security-constraint>
+    <!-- security-constraint>
         <web-resource-collection>
             <web-resource-name>all_resources</web-resource-name>
             <url-pattern>/*</url-pattern>
@@ -27,5 +27,5 @@
     </login-config>
     <security-role>
         <role-name>known_user</role-name>
-    </security-role>
+    </security-role -->
 </web-app>

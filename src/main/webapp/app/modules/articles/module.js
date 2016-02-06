@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    // 1) Define the article service.
+    // 1) Define the article module.
     var articleService = angular.module('articleService', ['ngRoute', 'ngSanitize', 'ngResource']);
 
     /*
@@ -85,14 +85,11 @@
     //
     // 3) Create the articles directive which uses the articleService to acquire article data.
     //
-    articleService.directive('articles', ['$scope', 'articleService', function ($scope, articleService) {
+    articleModule.directive('articles', ['$scope', 'articleService', function ($scope, articleService) {
         /*
          <articles organisation="mithlond" category="news" limit="5">
-         <article
-         title="Some title"
-         author="Das Häxxmästare"
-         created="2015-02-15 15:43>
-         </article>
+            <article  ....>
+            </article>
          </articles>
          */
         return {
@@ -116,21 +113,15 @@
                     articles.push(article);
                 }
             },
-            template: '<div class="article">'
-            + '<div class="article_title">{{}}</div></div>'
+            templateUrl: 'article.html'
         }
     }]);
 
-    articleService.directive('article', ['$scope', function ($scope) {
+    articleModule.directive('article', ['$scope', function ($scope) {
         /*
-         <articles organisation="mithlond" category="news">
-         <article
-         title="Some title"
-         author="Das Häxxmästare"
-         created="2015-02-15 15:43>
+         <article title="Some title" author="Das Häxxmästare" created="2015-02-15 15:43>
          ...
          </article>
-         </articles>
          */
 
         return {
@@ -159,8 +150,7 @@
                     panes.push(pane);
                 }
             },
-            template: '<div class="article">'
-            + '<div class="article_title">{{}}</div></div>'
+            templateUrl: 'article.html'
         }
     }]);
 })();
