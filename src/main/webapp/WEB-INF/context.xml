@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="true" privileged="true">
+
+    <!-- Enable reload of the web.xml resource -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+    <Manager pathname="/mithlond" />
+
+    <!-- Enable Comet connection tracking (provides events on session expiration as well as webapp lifecycle) -->
+    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+</Context>

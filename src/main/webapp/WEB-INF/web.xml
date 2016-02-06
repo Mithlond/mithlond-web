@@ -21,10 +21,28 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    <login-config>
-        <auth-method>KEYCLOAK</auth-method>
+
+    <!--
+        KeyCloak integration, defined by the 'keycloak' authentication method.
+        If running in development mode, simply switch this value to 'basic'.
+
+        This entry should be used only if stashing the KeyCloak adapter configuration
+        within a JSON file within the WEB-INF directory. We strive for being less
+        invasive.   :)
+    -->
+    <!-- login-config>
+        <auth-method>keycloak</auth-method>
         <realm-name>this is ignored currently</realm-name>
-    </login-config>
+    </login-config -->
+
+    <!--
+        If the current user has been logged in to KeyCloak, the (s)he should
+        have the global security role "known_user".
+
+        All things authorization are managed within the service, since KeyCloak
+        cannot handle cross-realm authorization (i.e. implying that a user in
+        realm1 cannot be assigned a role defined in realm2).
+    -->
     <security-role>
         <role-name>known_user</role-name>
     </security-role -->
