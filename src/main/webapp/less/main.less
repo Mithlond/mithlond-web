@@ -16,6 +16,34 @@
   src: local('Fondamento-Italic'), url('../fonts/Fondamento/Fondamento-Italic.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu-R'), url('../fonts/Ubuntu/Ubuntu-R.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Ubuntu-RI'), url('../fonts/Ubuntu/Ubuntu-RI.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Ubuntu-B'), url('../fonts/Ubuntu/Ubuntu-B.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: italic;
+  font-weight: bold;
+  src: local('Ubuntu-BI'), url('../fonts/Ubuntu/Ubuntu-BI.ttf') format('truetype');
+}
+
 //
 // 2. Palette definitions
 //    (Locally defined/downloaded TTFs for Webfonts)
@@ -79,27 +107,27 @@ body {
 // Mixin: Top navigation bar
 //
 .topNavBar(// Navbar colors
-  @navbar-color: @theme-headerfooter-text-color;
-  @navbar-background-color: @theme-headerfooter-background-color;
-  @navbar-border-color: @theme-headerfooter-border-color;
-  @navbar-hover-color: @theme-headerfooter-hover-color;
-  @navbar-hover-background-color: @theme-headerfooter-hover-background-color;
+  @navbar-color: @theme-headerfooter-text-color;                                   // Navbar Color
+  @navbar-background-color: @theme-headerfooter-background-color;                  // Navbar BG Color
+  @navbar-border-color: @theme-headerfooter-border-color;                          // Navbar Border Color
+  @navbar-hover-color: @theme-headerfooter-hover-color;                            // Navbar Hover Color
+  @navbar-hover-background-color: @theme-headerfooter-hover-background-color;      // Navbar Hover BG Color
   // Navbar links
-  @navbar-link-color: @theme-headerfooter-text-color;
-  @navbar-link-hover-color: @theme-headerfooter-hover-color;
-  @navbar-link-hover-bg: transparent;
-  @navbar-link-active-color: lighten(@theme-headerfooter-text-color, 10%);
-  @navbar-link-active-bg: darken(@theme-headerfooter-background-color, 6.5%);
-  @navbar-link-disabled-color: @theme-headerfooter-disabled-color;
-  @navbar-link-disabled-bg: @theme-headerfooter-disabled-background-color;
+  @navbar-link-color: @theme-headerfooter-text-color;                              // Navbar Link Color
+  @navbar-link-hover-color: @theme-headerfooter-hover-color;                       // Navbar Link Hover Color
+  @navbar-link-hover-bg: transparent;                                              // Navbar Link Hover BG Color
+  @navbar-link-active-color: lighten(@theme-headerfooter-text-color, 10%);         // Navbar Link active Color
+  @navbar-link-active-bg: darken(@theme-headerfooter-background-color, 6.5%);      // Navbar Link active BG Color
+  @navbar-link-disabled-color: @theme-headerfooter-disabled-color;                 // Navbar Link disabled Color
+  @navbar-link-disabled-bg: @theme-headerfooter-disabled-background-color;         // Navbar Link disabled BG Color
   // Navbar toggle
-  @navbar-toggle-hover-bg: transparent;
-  @navbar-toggle-icon-bar-bg: #888;
-  @navbar-toggle-border-color: #ddd;
+  @navbar-toggle-hover-bg: transparent;                                            // Navbar Toggle Hover BG Color
+  @navbar-toggle-icon-bar-bg: #888;                                                // Navbar Toggle Icon Bar BG Color
+  @navbar-toggle-border-color: #ddd;                                               // Navbar Toggle Border Color
   // Navbar brand label
-  @navbar-brand-color: @theme-headerfooter-text-color;
-  @navbar-brand-hover-color: darken(@theme-headerfooter-text-color, 10%);
-  @navbar-brand-hover-bg: transparent;
+  @navbar-brand-color: @theme-headerfooter-text-color;                             // Navbar Brand Color
+  @navbar-brand-hover-color: darken(@theme-headerfooter-text-color, 10%);          // Navbar Brand Hover Color
+  @navbar-brand-hover-bg: transparent;                                             // Navbar Brand Hover BG Color
 ) {
 
   // Standard definitions
@@ -173,12 +201,14 @@ body {
 
 .sections(
   @sections-color;
+  @sections-margin-top;
   @sections-margin-bottom;
   @sections-font-weight;
   @sections-font-family;
 ) {
   h1, h2, h3, h4, h5, h6 {
     color: @sections-color;
+    margin-top: @sections-margin-top;
     margin-bottom: @sections-margin-bottom;
     font-weight: @sections-font-weight;
 
@@ -269,19 +299,19 @@ body {
 //    (Contains CSS override definitions per theme)
 //
 .stdTheme(
-  @theme-name;
-  @theme-headerfooter-text-color;
-  @theme-headerfooter-background-color;
-  @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
-  @theme-headerfooter-hover-color;
-  @theme-headerfooter-hover-background-color;
-  @theme-headerfooter-disabled-color;
-  @theme-headerfooter-disabled-background-color: transparent;
-  @theme-mainContainer-transparency: 0.7;
-  @theme-text-background;
-  @theme-text-color;
-  @theme-title-background-color;
-  @theme-header-font-family: 'Ubuntu', sans-serif;) {
+  @theme-name;                                                                           // Theme name
+  @theme-headerfooter-text-color;                                                        // Header/Footer text color
+  @theme-headerfooter-background-color;                                                  // Header/Footer background color
+  @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);  // Header/Footer border color
+  @theme-headerfooter-hover-color;                                                       // Header/Footer hover color
+  @theme-headerfooter-hover-background-color;                                            // Header/Footer hover BG color
+  @theme-headerfooter-disabled-color;                                                    // Header/Footer disabled (text) color
+  @theme-headerfooter-disabled-background-color: transparent;                            // Header/Footer disabled BG color
+  @theme-mainContainer-transparency: 0.7;                                                // MainContainer transparency
+  @theme-text-background;                                                                // MainContainer BG color
+  @theme-text-color;                                                                     // MainContainer text color
+  @theme-title-background-color;                                                         // Title BG color
+  @theme-header-font-family: 'Ubuntu', sans-serif;) {                                    // Header font family
 
   // Standard definitions
   @theme-background-image: '../themes/@{theme-name}/image/background-image.jpg';
@@ -292,14 +322,27 @@ body {
   .contentContainer {
 
     // Fire the macro to create the content container.
-    .contentContainer(5px; @theme-title-background-color; rgba(255, 255, 255, @theme-mainContainer-transparency); 10px 10px 0 10px;);
+    .contentContainer(
+            5px;
+            @theme-title-background-color;
+            rgba(255, 255, 255, @theme-mainContainer-transparency);
+            10px 10px 0 10px;);
 
     // Add a standardized drop shadow.
-    .dropshadow(10px; 10px; 30px; 10px; @theme-headerfooter-background-color;);
+    .dropshadow(5px; 5px; 15px; 5px; @theme-headerfooter-background-color;);
 
     // Add formatting for infobox and articles
     .infobox {
-      .infobox(14pt; 400; @theme-header-font-family; 6px 10px; 1px solid; @theme-headerfooter-border-color; @theme-title-background-color; @theme-text-color; @theme-title-background-color;);
+      .infobox(
+              14pt;                               // Font size
+              400;                                // Font weight
+              @theme-header-font-family;          // Font family
+              6px 10px;                           // Title padding
+              1px solid;                          // Title border
+              @theme-headerfooter-border-color;   // Title border-color
+              @theme-headerfooter-text-color;     // Title color (text)
+              @theme-text-color;                  // Text color
+              @theme-title-background-color;);    // Background color
     }
   }
 
@@ -315,12 +358,33 @@ body {
     #mainContent {
       border-radius: 5px;
       margin-left: 30px;
+      color: @theme-text-color;
+      background-color: rgba(255, 255, 255, @theme-mainContainer-transparency);
+
+      h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 0.3em;
+      }
     }
   }
 
   #topNavBar {
     .topNavBar(
-            @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-text-color; @theme-headerfooter-hover-color; transparent; lighten(@theme-headerfooter-text-color, 10%); darken(@theme-headerfooter-background-color, 6.5%); @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; transparent; #888; #ddd; @theme-headerfooter-text-color; darken(@theme-headerfooter-text-color, 10%); transparent;
+            @theme-headerfooter-text-color;                                  // Navbar Color
+            @theme-headerfooter-background-color;                            // Navbar BG Color
+            @theme-headerfooter-border-color;                                // Navbar Border Color
+            @theme-headerfooter-hover-color;                                 // Navbar Hover Color
+            @theme-headerfooter-hover-background-color;                      // Navbar Hover BG Color
+            @theme-headerfooter-text-color;                                  // Navbar Link Color
+            lighten(@theme-headerfooter-hover-color, 10%);                   // Navbar Link Hover Color
+            transparent;                                                     // Navbar Link Hover BG Color
+            lighten(@theme-headerfooter-text-color, 10%);                    // Navbar Link active Color
+            darken(@theme-headerfooter-background-color, 6.5%);              // Navbar Link active BG Color
+            @theme-headerfooter-disabled-color;                              // Navbar Link disabled Color
+            @theme-headerfooter-disabled-background-color;                   // Navbar Link disabled BG Color
+            transparent;                                                     // Navbar Toggle Hover BG Color
+            @theme-headerfooter-text-color;                                  // Navbar Toggle Icon Bar BG Color
+            darken(@theme-headerfooter-text-color, 10%);                     // Navbar Toggle Border Color
     );
   }
 
@@ -346,7 +410,19 @@ body {
   @theme-headerfooter-disabled-color: #559;
   @theme-headerfooter-disabled-background-color: transparent;
 
-  .stdTheme('sylvan'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; 0.7; #f5f5f5; @theme-text-color; @theme-headerfooter-background-color; 'Fondamento', cursive;);
+  .stdTheme('sylvan';
+          @theme-headerfooter-text-color;
+          @theme-headerfooter-background-color;
+          @theme-headerfooter-border-color;
+          @theme-headerfooter-hover-color;
+          @theme-headerfooter-hover-background-color;
+          @theme-headerfooter-disabled-color;
+          @theme-headerfooter-disabled-background-color;
+          0.7;
+          #f5f5f5;
+          @theme-text-color;
+          @theme-headerfooter-background-color;
+          'Fondamento', cursive;);
 
   h1, h2, h3, h4, h5, h6 {
     color: #444480;
@@ -368,7 +444,19 @@ body {
   @theme-headerfooter-disabled-color: #559;
   @theme-headerfooter-disabled-background-color: transparent;
 
-  .stdTheme('ocean'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; 0.7; #f5f5f5; @theme-text-color; @theme-headerfooter-background-color; 'Ubuntu', sans-serif;);
+  // Delegate
+  .stdTheme('ocean'; @theme-headerfooter-text-color;
+          @theme-headerfooter-background-color;
+          @theme-headerfooter-border-color;
+          @theme-headerfooter-hover-color;
+          @theme-headerfooter-hover-background-color;
+          @theme-headerfooter-disabled-color;
+          @theme-headerfooter-disabled-background-color;
+          0.7;
+          #f5f5f5;
+          @theme-text-color;
+          @theme-headerfooter-background-color;
+          "Helvetica Neue", Helvetica, Arial, sans-serif;);
 }
 
 .silly {
@@ -376,20 +464,47 @@ body {
   // Palette definitions
   @theme-text-color: #2F455F;
   @theme-headerfooter-text-color: #ccaea5;
-  @theme-headerfooter-background-color: #2a313b;
+  @theme-headerfooter-background-color: #6E5A56;
   @theme-headerfooter-border-color: darken(@theme-headerfooter-background-color, 6.5%);
   @theme-headerfooter-hover-color: #A68984;
   @theme-headerfooter-hover-background-color: #D2ADA8;
-  @theme-headerfooter-disabled-color: #559;
+  @theme-headerfooter-disabled-color: darken(@theme-headerfooter-hover-color, 6.5%);
   @theme-headerfooter-disabled-background-color: transparent;
 
-  .stdTheme('silly'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; 0.7; #f5f5f5; @theme-text-color; @theme-headerfooter-background-color; 'Ubuntu', sans-serif;);
+  .stdTheme('silly';                                      // Theme name
+          @theme-headerfooter-text-color;                 // Header/Footer text color
+          @theme-headerfooter-background-color;           // Header/Footer background color
+          @theme-headerfooter-border-color;               // Header/Footer border color
+          @theme-headerfooter-hover-color;                // Header/Footer hover color
+          @theme-headerfooter-hover-background-color;     // Header/Footer hover BG color
+          @theme-headerfooter-disabled-color;             // Header/Footer disabled (text) color
+          @theme-headerfooter-disabled-background-color;  // Header/Footer disabled BG color
+          0.7;                                            // MainContainer transparency
+          #f5f5f5;                                        // MainContainer BG color
+          @theme-text-color;                              // MainContainer text color
+          @theme-headerfooter-background-color;           // Infobox Title BG color
+          'Ubuntu', sans-serif;);  // Header font family
+
+  // Add formatting for infobox and articles
+  .contentContainer {
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Ubuntu', sans-serif;
+    }
+
+    .infobox {
+      .title {
+        font-family: 'Ubuntu', sans-serif;
+        background-color: @theme-headerfooter-background-color;
+      }
+    }
+  }
 }
 
 .nazgul {
 
   // Palette definitions
-  @theme-text-color: #eeffee;
+  @theme-text-color: #efe;
   @theme-headerfooter-text-color: #99ff99;
   @theme-headerfooter-background-color: #333333;
   @theme-headerfooter-border-color: #111111;
@@ -399,10 +514,22 @@ body {
   @theme-headerfooter-disabled-background-color: transparent;
   @theme-mainContainer-transparency: 0.7;
 
-  .stdTheme('nazgul'; @theme-headerfooter-text-color; @theme-headerfooter-background-color; @theme-headerfooter-border-color; @theme-headerfooter-hover-color; @theme-headerfooter-hover-background-color; @theme-headerfooter-disabled-color; @theme-headerfooter-disabled-background-color; @theme-mainContainer-transparency; #f5f5f5; @theme-text-color; @theme-headerfooter-background-color; 'Fondamento', cursive;);
+  .stdTheme('nazgul';                                     // Theme name
+          @theme-headerfooter-text-color;                 // Header/Footer text color
+          @theme-headerfooter-background-color;           // Header/Footer background color
+          @theme-headerfooter-border-color;               // Header/Footer border color
+          @theme-headerfooter-hover-color;                // Header/Footer hover color
+          @theme-headerfooter-hover-background-color;     // Header/Footer hover BG color
+          @theme-headerfooter-disabled-color;             // Header/Footer disabled (text) color
+          @theme-headerfooter-disabled-background-color;  // Header/Footer disabled BG color
+          @theme-mainContainer-transparency;              // MainContainer transparency
+          #f5f5f5;                                        // MainContainer BG color
+          @theme-text-color;                              // MainContainer text color
+          @theme-headerfooter-background-color;           // Infobox Title BG color
+          'Fondamento', cursive;);                        // Header font family
 
   // Use a green, stylish font for headings.
-  .sections(#3D733D; 0.3em; 400; 'Fondamento', cursive;);
+  .sections(#9f9; 10px; 0; 400; 'Fondamento', cursive;);
 
   // Outline the content containers
   .contentContainer {
@@ -415,7 +542,29 @@ body {
 
     // Add formatting for infobox and articles
     .infobox {
-      .infobox(14pt; 400; 'Fondamento', cursive; 6px 10px; 1px solid #444444 #333333 #333333 #444444; #eeffee; #222222;);
+      .infobox(
+              14pt;
+              400;
+              'Fondamento', cursive;
+              6px 10px;
+              1px solid #444444 #333333 #333333 #444444;
+              #efe;
+              #222;);
+
+      .title {
+        color: #efe;
+        background-color: #222;
+        border-color: #333 #444 #444 #333;
+      }
+    }
+  }
+
+  // Page structure elements definition.
+  #mainContainer {
+
+    // The main content div contains the main information on the page.
+    #mainContent {
+      background-color: rgba(68, 68, 68, 0.6);
     }
   }
 }

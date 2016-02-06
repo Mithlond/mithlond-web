@@ -21,6 +21,7 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    -->
 
     <!--
         KeyCloak integration, defined by the 'keycloak' authentication method.
@@ -42,7 +43,7 @@
         All things authorization are managed within the service, since KeyCloak
         cannot handle cross-realm authorization (i.e. implying that a user in
         realm1 cannot be assigned a role defined in realm2).
-    -->
+
     <security-role>
         <role-name>known_user</role-name>
     </security-role -->
